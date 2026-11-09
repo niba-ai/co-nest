@@ -1,7 +1,8 @@
-// Feste Auswahllisten und Texte für Co-Nest
+// Feste Auswahllisten und Texte für Nid Commun
 
-export const ROLE = { mutter: "Mutter", vater: "Vater", bezug: "Begleitende Bezugsperson" };
-export const ROLE_LONG = { ...ROLE, bezug: "Begleitende Bezugsperson (ähnlich wie Gotte / Götti)" };
+export const ROLE = { mutter: "Mutter", vater: "Vater", elternteil: "Elternteil", bezug: "Begleitende Bezugsperson" };
+export const ROLE_LONG = { ...ROLE, elternteil: "Elternteil (ohne Festlegung als Mutter oder Vater)", bezug: "Begleitende Bezugsperson (ähnlich wie Gotte / Götti)" };
+export const CONSTELLATION = { einzeln: "Einzelperson", paar: "Paar", gruppe: "Gruppe (3 oder mehr)" };
 export const MODEL = { gleich: "Halb-halb", flex: "Nach Mass", offen: "Noch offen" };
 export const KIDS = { keine: "Noch keine Kinder", eins: "1 Kind", mehrere: "2 oder mehr Kinder" };
 

@@ -1,5 +1,5 @@
 -- =====================================================================
---  Co-Nest – Datenbank
+--  Nid Commun – Datenbank
 --  Diesen gesamten Text im Supabase "SQL Editor" einfügen und auf "Run"
 --  klicken. Er legt alle Tabellen und Sicherheitsregeln an.
 --  Man kann ihn gefahrlos mehrmals ausführen.
@@ -12,7 +12,8 @@ create table if not exists public.profiles (
   birth_year    int  not null,
   canton        text not null,
   city          text check (char_length(city) <= 60),
-  role          text not null check (role in ('mutter','vater','bezug')),
+  role          text not null,
+  constellation text not null default 'einzeln',
   model         text not null default 'offen' check (model in ('gleich','flex','offen')),
   split         int  not null default 4 check (split between 0 and 4),
   side          text not null default 'gross' check (side in ('gross','klein')),
@@ -30,6 +31,15 @@ create table if not exists public.profiles (
   created_at    timestamptz not null default now(),
   updated_at    timestamptz not null default now()
 );
+
+-- Erlaubte Werte (auch bei bereits bestehender Tabelle aktualisieren)
+alter table public.profiles add column if not exists constellation text not null default 'einzeln';
+alter table public.profiles drop constraint if exists profiles_role_check;
+alter table public.profiles add constraint profiles_role_check
+  check (role in ('mutter','vater','elternteil','bezug'));
+alter table public.profiles drop constraint if exists profiles_constellation_check;
+alter table public.profiles add constraint profiles_constellation_check
+  check (constellation in ('einzeln','paar','gruppe'));
 
 -- Mindestalter 18 Jahre
 create or replace function public.check_profile_age() returns trigger
@@ -201,7 +211,7 @@ drop policy if exists "entblocken" on public.blocks;
 create policy "entblocken" on public.blocks for delete to authenticated
   using (blocker_id = auth.uid());
 
--- Meldungen: nur senden. Lesen kann nur das Co-Nest-Team im Supabase-Dashboard.
+-- Meldungen: nur senden. Lesen kann nur das Nid Commun-Team im Supabase-Dashboard.
 drop policy if exists "melden" on public.reports;
 create policy "melden" on public.reports for insert to authenticated
   with check (reporter_id = auth.uid());

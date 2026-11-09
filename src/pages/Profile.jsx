@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase.js";
 import { useAuth } from "../auth.jsx";
-import { ROLE_LONG, MODEL, KIDS, KANTONE, OPT, VALUES, SPLITS, VISIBILITY } from "../data.js";
+import { ROLE_LONG, CONSTELLATION, MODEL, KIDS, KANTONE, OPT, VALUES, SPLITS, VISIBILITY } from "../data.js";
 import { Err, deErr, Modal, Note } from "../ui.jsx";
 
 const STEPS = ["Über mich", "Lebenssituation", "Werte & Erziehung", "Familie"];
 const EMPTY = {
-  first_name: "", birth_year: "", canton: "", city: "", role: "mutter", kids: "keine",
+  first_name: "", birth_year: "", canton: "", city: "", role: "mutter", constellation: "einzeln", kids: "keine",
   job: "", workload: "", housing: "", languages: "",
   rel_edu: "", diet: "", school: "", media: "",
   model: "offen", split: 4, side: "gross", about: "",
@@ -86,7 +86,7 @@ export function ProfilePage() {
   return (
     <div className="page wrap" style={{ maxWidth: 760 }}>
       <div className="ph" style={{ paddingBottom: 24 }}>
-        <span className="eyebrow">{editing ? "Mein Profil" : "Willkommen bei Co-Nest"}</span>
+        <span className="eyebrow">{editing ? "Mein Profil" : "Willkommen bei Nid Commun"}</span>
         <h1>{editing ? <>Dein <em className="s">Profil.</em></> : <>Erzähl uns <em className="s">von dir.</em></>}</h1>
         {!editing && <p className="lead">Dein Profil ist nur für angemeldete Mitglieder sichtbar. Je mehr du angibst, desto besser passen die Vorschläge.</p>}
       </div>
@@ -102,13 +102,14 @@ export function ProfilePage() {
 
       <form onSubmit={submit} key={st} className="page card-f">
         {st === 0 && <>
-          <label className="f">Vorname<span className="opt"> (sichtbar für Mitglieder)</span><input required maxLength={60} value={f.first_name} onChange={e => up("first_name", e.target.value)} placeholder="z. B. Lena" /></label>
+          <Sel label="Ich bin auf Nid Commun als" required value={f.constellation} onChange={v => up("constellation", v)} opts={CONSTELLATION} />
+          <label className="f">{f.constellation === "einzeln" ? "Vorname" : "Vornamen"}<span className="opt"> (sichtbar für Mitglieder{f.constellation !== "einzeln" ? ", z. B. «Marc & Thomas»" : ""})</span><input required maxLength={60} value={f.first_name} onChange={e => up("first_name", e.target.value)} placeholder="z. B. Lena" /></label>
           <div className="row2">
-            <label className="f">Geburtsjahr<input required type="number" min={1940} max={thisYear - 18} value={f.birth_year} onChange={e => up("birth_year", e.target.value)} placeholder="z. B. 1990" /></label>
+            <label className="f">{f.constellation === "einzeln" ? "Geburtsjahr" : "Geburtsjahr (jüngste Person)"}<input required type="number" min={1940} max={thisYear - 18} value={f.birth_year} onChange={e => up("birth_year", e.target.value)} placeholder="z. B. 1990" /></label>
             <Sel label="Kanton" required value={f.canton} onChange={v => up("canton", v)} opts={KANTONE} />
           </div>
           <label className="f">Ort<span className="opt"> (optional)</span><input maxLength={60} value={f.city} onChange={e => up("city", e.target.value)} placeholder="z. B. Winterthur" /></label>
-          <Sel label="Meine Rolle in der Familie" required value={f.role} onChange={v => up("role", v)} opts={ROLE_LONG} />
+          <Sel label={f.constellation === "einzeln" ? "Meine Rolle in der Familie" : "Eure Rolle in der Familie"} required value={f.role} onChange={v => up("role", v)} opts={ROLE_LONG} />
           <Sel label="Hast du bereits Kinder?" required value={f.kids} onChange={v => up("kids", v)} opts={KIDS} />
           <div className="sens">
             <b>Freiwillige Angaben</b>

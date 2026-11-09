@@ -2,9 +2,10 @@ import { ROLE, VALUES, LANG, KANTONE, shareOf } from "./data.js";
 
 // Wie gut passen zwei Rollen zusammen? (max. 30 Punkte)
 const ROLE_FIT = {
-  mutter: { vater: 30, bezug: 24, mutter: 18 },
-  vater: { mutter: 30, bezug: 20, vater: 16 },
-  bezug: { mutter: 30, vater: 30, bezug: 0 },
+  mutter: { vater: 30, elternteil: 26, bezug: 24, mutter: 18 },
+  vater: { mutter: 30, elternteil: 26, bezug: 20, vater: 16 },
+  elternteil: { mutter: 26, vater: 26, elternteil: 24, bezug: 24 },
+  bezug: { mutter: 30, vater: 30, elternteil: 30, bezug: 0 },
 };
 
 // Berechnet die Übereinstimmung (0–100 %) und die Gründe dafür

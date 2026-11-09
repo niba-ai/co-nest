@@ -1,4 +1,4 @@
-# Co-Nest online stellen – Schritt für Schritt
+# Nid Commun online stellen – Schritt für Schritt
 
 Diese Anleitung ist für Menschen ohne Programmiererfahrung geschrieben.
 Du brauchst etwa **45 Minuten** und **kein Geld**.
@@ -31,7 +31,7 @@ Du richtest drei kostenlose Dienste ein:
 
 1. Gehe auf **supabase.com** → **Start your project** → mit GitHub anmelden.
 2. Klicke auf **New project**.
-   - **Name:** `co-nest`
+   - **Name:** `nid-commun`
    - **Database Password:** auf «Generate a password» klicken und das Passwort **sicher aufbewahren**
      (z. B. in einem Passwort-Manager).
    - **Region:** **Central Europe (Zurich)** ← wichtig!
@@ -62,7 +62,7 @@ Beide Werte brauchst du gleich. ⚠️ Den **service_role / secret key** **niema
 
 1. Gehe auf **netlify.com** → **Sign up** → **mit GitHub anmelden**.
 2. **Add new site** → **Import an existing project** → **GitHub**.
-3. Wähle das Repository `co-nest` aus (evtl. musst du Netlify den Zugriff erlauben).
+3. Wähle das Repository `co-nest` (bzw. `nid-commun`, falls du es umbenannt hast) aus (evtl. musst du Netlify den Zugriff erlauben).
 4. Die Einstellungen werden automatisch erkannt (Build command `npm run build`, Publish directory `dist`).
 5. Klicke auf **Add environment variables** und trage ein:
 
@@ -74,7 +74,7 @@ Beide Werte brauchst du gleich. ⚠️ Den **service_role / secret key** **niema
 6. **Deploy** klicken. Nach 1–2 Minuten ist die Seite online, z. B. unter
    `https://zufaelliger-name.netlify.app`.
 7. Unter **Site configuration → Change site name** kannst du die Adresse ändern, z. B. in
-   `co-nest.netlify.app` (falls noch frei).
+   `nidcommun.netlify.app` (falls noch frei).
 
 ---
 
@@ -83,8 +83,8 @@ Beide Werte brauchst du gleich. ⚠️ Den **service_role / secret key** **niema
 Damit die Bestätigungs-E-Mails auf deine Website zurückführen:
 
 1. In Supabase: **Authentication** → **URL Configuration**.
-2. **Site URL:** deine Netlify-Adresse eintragen, z. B. `https://co-nest.netlify.app`
-3. **Redirect URLs** → **Add URL:** `https://co-nest.netlify.app/**`
+2. **Site URL:** deine Netlify-Adresse eintragen, z. B. `https://nidcommun.netlify.app`
+3. **Redirect URLs** → **Add URL:** `https://nidcommun.netlify.app/**`
 4. Speichern.
 
 *(Optional)* Unter **Authentication → Emails** kannst du die Texte der E-Mails auf Deutsch übersetzen.
@@ -98,7 +98,7 @@ Damit die Bestätigungs-E-Mails auf deine Website zurückführen:
 3. Registriere ein zweites Konto (andere E-Mail-Adresse), sende eine Kontaktanfrage, nimm sie an
    und schreibt euch Nachrichten.
 
-🎉 Fertig – Co-Nest ist online!
+🎉 Fertig – Nid Commun ist online!
 
 ---
 
@@ -109,7 +109,7 @@ Ein Konto sperren: **Authentication → Users** → Benutzer auswählen → **Ba
 
 **Grenzen der Gratis-Versionen (Stand: bitte bei den Anbietern prüfen):**
 - Supabase pausiert Gratis-Projekte, wenn sie längere Zeit (ca. 1 Woche) nicht benutzt werden.
-  Du kannst sie im Dashboard mit einem Klick wieder starten. Sobald Co-Nest regelmässig genutzt wird, passiert das nicht.
+  Du kannst sie im Dashboard mit einem Klick wieder starten. Sobald Nid Commun regelmässig genutzt wird, passiert das nicht.
 - Supabase verschickt mit dem eingebauten E-Mail-Dienst nur **wenige E-Mails pro Stunde**.
   Für den richtigen Start einen eigenen E-Mail-Dienst einrichten (Authentication → Emails → SMTP Settings),
   z. B. mit einer E-Mail-Adresse deiner eigenen Domain.
@@ -120,7 +120,7 @@ Auftragsverarbeitungsvertrag (DPA) von Supabase ab. Lass die Rechtstexte vor dem
 
 **Änderungen an der Website:** Jede Änderung, die auf GitHub hochgeladen wird, veröffentlicht Netlify automatisch.
 
-**Eigene Domain (später):** z. B. `co-nest.ch` bei einem Schweizer Anbieter kaufen (ca. CHF 10–20/Jahr),
+**Eigene Domain (später):** z. B. `nidcommun.ch` bei einem Schweizer Anbieter kaufen (ca. CHF 10–20/Jahr),
 dann in Netlify unter **Domain management** hinzufügen und in Supabase (Schritt 5) die Adresse anpassen.
 
 ---

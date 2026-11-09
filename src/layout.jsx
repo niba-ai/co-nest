@@ -49,7 +49,7 @@ export function Header() {
   return (
     <header className={sc ? "sc" : ""}>
       <div className="wrap hd">
-        <Link to="/" className="logo"><Logo />Co-Nest</Link>
+        <Link to="/" className="logo"><Logo />Nid Commun</Link>
         <nav className="main">
           {NAV.map(([to, l]) => <NavLink key={to} to={to} className={({ isActive }) => isActive ? "on" : ""}>{l}</NavLink>)}
         </nav>
@@ -83,7 +83,7 @@ export function Footer() {
       <div className="wrap">
         <div className="ft">
           <div>
-            <div className="logo" style={{ marginBottom: 14 }}><Logo />Co-Nest</div>
+            <div className="logo" style={{ marginBottom: 14 }}><Logo />Nid Commun</div>
             <p style={{ maxWidth: 300 }}>Die Schweizer Plattform für Menschen, die gemeinsam Eltern werden möchten – mit Respekt, Klarheit und Herz.</p>
           </div>
           <div><h5>Plattform</h5><Link to="/so-funktionierts">So funktioniert's</Link><Link to="/entdecken">Entdecken</Link>
@@ -91,7 +91,7 @@ export function Footer() {
           <div><h5>Über uns</h5><Link to="/ueber-uns">Unsere Geschichte</Link><Link to="/faq">Häufige Fragen</Link></div>
           <div><h5>Rechtliches</h5><Link to="/datenschutz">Datenschutz</Link><Link to="/agb">AGB</Link><Link to="/impressum">Impressum</Link></div>
         </div>
-        <div className="fb"><span>© {new Date().getFullYear()} Co-Nest</span><span>Mit Sorgfalt gestaltet in der Schweiz</span></div>
+        <div className="fb"><span>© {new Date().getFullYear()} Nid Commun</span><span>Mit Sorgfalt gestaltet in der Schweiz</span></div>
       </div>
     </footer>
   );

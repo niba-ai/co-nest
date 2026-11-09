@@ -200,7 +200,7 @@ function Chat({ me, other, onBack, onChanged }) {
     {dlg === "video" && (
       <Modal onClose={() => setDlg(null)} className="dlg">
         <h3>Videoanrufe kommen bald.</h3>
-        <p className="dl-p">Wir arbeiten an Videoanrufen direkt in Co-Nest, ohne dass ihr eure Telefonnummer teilen müsst. Bis dahin könnt ihr hier schreiben.</p>
+        <p className="dl-p">Wir arbeiten an Videoanrufen direkt in Nid Commun, ohne dass ihr eure Telefonnummer teilen müsst. Bis dahin könnt ihr hier schreiben.</p>
         <button className="btn btn-p full" onClick={() => setDlg(null)}>Verstanden</button>
       </Modal>
     )}

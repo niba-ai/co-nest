@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../supabase.js";
 import { useAuth } from "../auth.jsx";
-import { ROLE, MODEL, KIDS, KANTONE, VALUES, age, shareOf } from "../data.js";
+import { ROLE, CONSTELLATION, MODEL, KIDS, KANTONE, VALUES, age, shareOf } from "../data.js";
 import { matchOf } from "../match.js";
 import { Scene, hashV, Arr, BtnLink, Share, Modal, Note, Err, deErr, I } from "../ui.jsx";
 import { SafetyDialog } from "../safety.jsx";
@@ -52,7 +52,7 @@ export function Discover() {
     .filter(p => (r === "alle" || p.role === r) && (!kidsOnly || p.kids !== "keine"))
     .sort((a, b) => b.score - a.score), [list, profile, r, kidsOnly]);
 
-  if (!user) return <Gate title="Profile sind nur für Mitglieder sichtbar." text="So bleibt Co-Nest ein geschützter Ort. Erstelle kostenlos ein Konto, um passende Menschen zu entdecken." to="/anmelden" cta="Kostenlos registrieren" />;
+  if (!user) return <Gate title="Profile sind nur für Mitglieder sichtbar." text="So bleibt Nid Commun ein geschützter Ort. Erstelle kostenlos ein Konto, um passende Menschen zu entdecken." to="/anmelden" cta="Kostenlos registrieren" />;
   if (!profile?.is_complete) return <Gate title="Fast geschafft!" text="Erstelle zuerst dein Profil. Dann können wir dir passende Vorschläge zeigen." to="/profil" cta="Profil erstellen" />;
 
   const reqWith = id => reqs.find(x => x.from_id === id || x.to_id === id);
@@ -87,7 +87,7 @@ export function Discover() {
                     <span className={"mbadge" + (p.score >= 75 ? " hi" : "")}>{p.score}% Übereinstimmung</span></div>
                   <div className="bd">
                     <h3>{p.first_name}</h3>
-                    <div className="meta">{ROLE[p.role]} · {age(p.birth_year)} · {p.city || KANTONE[p.canton]}</div>
+                    <div className="meta">{ROLE[p.role]}{p.constellation && p.constellation !== "einzeln" ? " · " + CONSTELLATION[p.constellation] : ""} · {age(p.birth_year)} · {p.city || KANTONE[p.canton]}</div>
                     <p>{p.about ? (p.about.length > 160 ? p.about.slice(0, 160) + " …" : p.about) : "Noch keine Beschreibung."}</p>
                     <div className="tags">
                       {q && <span className="tag st">{q.status === "accepted" ? "✓ Kontakt" : q.to_id === user.id && q.status === "pending" ? "Hat dich angefragt" : "Anfrage gesendet"}</span>}
@@ -101,7 +101,7 @@ export function Discover() {
           </div>
         )}
         {list && scored.length === 0 && (
-          <Note>Noch keine passenden Profile. Co-Nest ist neu – schau bald wieder vorbei oder erzähle Freundinnen und Freunden davon.</Note>
+          <Note>Noch keine passenden Profile. Nid Commun ist neu – schau bald wieder vorbei oder erzähle Freundinnen und Freunden davon.</Note>
         )}
       </div>
       {sel && <ProfileModal p={sel} me={user.id} req={reqWith(sel.id)} onClose={() => setSel(null)} onChange={load}
@@ -154,8 +154,9 @@ function ProfileModal({ p, me, req, onClose, onChange, onChat }) {
         <div className="why"><b>Warum ihr passen könntet</b><ul>{p.why.map(w => <li key={w}>{w}</li>)}</ul></div>
 
         <div className="kv">
+          <div><small>Konstellation</small>{CONSTELLATION[p.constellation] || "Einzelperson"}</div>
           <div><small>Familienmodell</small>{MODEL[p.model]}</div>
-          <div><small>Bereits Kinder</small>{KIDS[p.kids]}</div>
+          <div style={{ gridColumn: "1 / -1" }}><small>Bereits Kinder</small>{KIDS[p.kids]}</div>
           <div style={{ gridColumn: "1 / -1" }}><small>Gewünschter eigener Betreuungsanteil</small><Share v={shareOf(p.split, p.side)} /></div>
         </div>
         {sens && (sens.gender || sens.orientation || sens.religion) && <>

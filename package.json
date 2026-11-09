@@ -1,8 +1,8 @@
 {
-  "name": "co-nest",
+  "name": "nid-commun",
   "private": true,
   "version": "1.0.0",
-  "description": "Co-Nest – Schweizer Plattform für Co-Parenting",
+  "description": "Nid Commun – Schweizer Plattform für Co-Parenting",
   "type": "module",
   "scripts": {
     "dev": "vite",
